@@ -1,0 +1,1435 @@
+[
+ {
+  "sid": "s1341",
+  "type": "fake",
+  "text": "A study in Science drew on brain scans of 176 babies and tissue from 83 others, finding that key cerebellar neurons in premature infants develop differently, during a stretch in which the organ's volume swells about tenfold.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "cerebellum volume grows about 5x -> about tenfold",
+  "trick": "inflated growth factor buried mid-text"
+ },
+ {
+  "sid": "s1710",
+  "type": "plain",
+  "text": "On the opening day of a city-state's annual fintech festival, an island's pavilion became a focal point, where a local firm's chief executive demonstrated a video-based application to visiting international exhibitors.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   1
+  ],
+  "changed": "",
+  "trick": "secondary angle: a national pavilion at a trade show"
+ },
+ {
+  "sid": "s1797",
+  "type": "fake",
+  "text": "The agency running a Korean tax-accountant licensing exam tendered a study trip to Japan for 63 of its staff, budgeted at about 80 million won, the day after the top scorer admitted cheating with AI; it later cancelled.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [],
+  "changed": "Taiwan -> Japan",
+  "trick": "follow-up detail rather than the cheating scandal itself"
+ },
+ {
+  "sid": "s0987",
+  "type": "fake",
+  "text": "A federal judge in Seattle on Tuesday issued a preliminary injunction stopping two homeland-security directives from August that curbed foreign students' work-experience placements, saying they fundamentally changed how such training operates.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2
+  ],
+  "changed": "Boston -> Seattle",
+  "trick": "court location swapped; similar visa ruling also in list"
+ },
+ {
+  "sid": "s1528",
+  "type": "plain",
+  "text": "A veteran entertainer who had publicly questioned a performers' union in the island's capital over its care for elders after a 68-year-old retired actor's plight appeared at an event today, said every word she spoke was backed by evidence, and left quickly.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "gossip follow-up with a one-line quote"
+ },
+ {
+  "sid": "s1598",
+  "type": "plain",
+  "text": "A US aviation regulator said it halted new installations of network routers after technicians traced last Friday's nationwide grounding of flights to one newly fitted unit at a communications site in a south-central state.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "cause of an outage rather than the outage"
+ },
+ {
+  "sid": "s1353",
+  "type": "plain",
+  "text": "A critical-care doctor noted that a study of over 150,000 people found daily calcium and vitamin D cut fractures by only about 1 per cent, whereas strength, weight-bearing and balance training reduced falls among seniors by 23 per cent.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "health-advice story with two similar statistics"
+ },
+ {
+  "sid": "s1054",
+  "type": "plain",
+  "text": "A southern Taiwan court rarely waived punishment for a sick, indebted man who stabbed his wife after she, unable to do it herself, asked him to; both survived and were hospitalised after relatives found blood across the bathroom floor.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "unusual sentencing outcome with grim details"
+ },
+ {
+  "sid": "s1421",
+  "type": "plain",
+  "text": "A professional networking platform's data released Wednesday showed city-state companies with stronger AI skills grew headcount faster than weaker peers at every size, with the gap widest among mid-sized firms, even as overall hiring slowed.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "report with generic AI-jobs theme"
+ },
+ {
+  "sid": "s1818",
+  "type": "plain",
+  "text": "A former US president's memoir, published Tuesday, says his repeated pledges to defend an East Asian island if attacked were sincere, adding that he feared a takeover would bring devastating consequences and possibly war with other Asian countries.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "book excerpt, other coverage of the same memoir covers different topics"
+ },
+ {
+  "sid": "s1721",
+  "type": "plain",
+  "text": "A joint seminar between two countries' engineering academies on advanced materials took place in a Yunnan city yesterday, drawing more than 100 academicians and experts, as an event under a scientists' forum hosted by a local technology university.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "bureaucratic academic event, few distinguishing facts"
+ },
+ {
+  "sid": "s1260",
+  "type": "fake",
+  "text": "The Philippines' central bank raised its key rate by 25 basis points to 6 per cent, higher than the 5.75 per cent that markets had expected, as the currency touched a record low.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "Indonesia -> the Philippines",
+  "trick": "country swap on a rate decision"
+ },
+ {
+  "sid": "s1170",
+  "type": "fake",
+  "text": "A US sportswear giant held its first investor day in about a decade, forecast revenue growth returning in fiscal 2029, yet saw its shares jump more than 6 per cent to roughly $36.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "shares fell more than 6% -> jumped more than 6%",
+  "trick": "direction reversed; fiscal-year forecast kept"
+ },
+ {
+  "sid": "s1701",
+  "type": "plain",
+  "text": "A city-state's prime minister wrote in a Chinese ruling-party newspaper that his country will host a Pacific economic forum in 2030, and said he hopes this week's meeting in Shenzhen yields substantive results.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "op-ed event rather than a news announcement"
+ },
+ {
+  "sid": "s1448",
+  "type": "plain",
+  "text": "An AI chip designer's interim chief executive said it will no longer supply a certain older-generation data-centre accelerator to a huge market, days after the US treasury secretary accused the commerce secretary of being lax on export controls.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "model name withheld; related export-control feud is background"
+ },
+ {
+  "sid": "s1773",
+  "type": "plain",
+  "text": "On the third day of an annual maritime week in a Chinese financial hub, its leader spoke at a logistics, shipping and air-cargo conference on its second day, where several shipping and aviation outcomes were announced.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   4
+  ],
+  "changed": "",
+  "trick": "many overlapping maritime-week stories"
+ },
+ {
+  "sid": "s1277",
+  "type": "plain",
+  "text": "An under-19 team ended an eight-year wait for a tournament title with a 2-1 win over a regional rival, whose press then asked whether its football has any future after a second straight painful loss.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "youth final seen through the loser's media reaction"
+ },
+ {
+  "sid": "s1053",
+  "type": "plain",
+  "text": "A man in eastern China was jailed for a year and a half after, while barred from luxury spending as a judgment debtor, he kept flying and riding high-speed trains and took in about 290,000 yuan through a messaging app.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   2,
+   4
+  ],
+  "changed": "",
+  "trick": "one case among several model cases released the same day"
+ },
+ {
+  "sid": "s1771",
+  "type": "fake",
+  "text": "A tropical Chinese island's port and a Macao counterpart agreed to become partner ports in a memorandum signed Monday during a maritime week, pledging route complementarity, green shipping channels and talent exchange.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "Hong Kong -> Macao",
+  "trick": "neighbouring city swapped"
+ },
+ {
+  "sid": "s1393",
+  "type": "plain",
+  "text": "A south-eastern Chinese province's acting governor chaired a meeting on food safety and school canteen clean-ups, urging deeper use of a one-product-one-code traceability system, internet-plus-AI oversight and a continued high-pressure crackdown.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "government meeting with slogan-heavy text"
+ },
+ {
+  "sid": "s1508",
+  "type": "fake",
+  "text": "Across a European country on Tuesday, students joined private-sector workers and pensioners in a new strike-driven protest day; unions claimed over half a million, while the interior ministry counted about 246,000 nationwide and 28,000 in the capital.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "interior ministry count 146,000 -> 246,000",
+  "trick": "official vs union crowd counts, number altered"
+ },
+ {
+  "sid": "s1070",
+  "type": "plain",
+  "text": "A national courts work conference held over Monday and Tuesday in Beijing relayed a leader's instruction to build a just, efficient and authoritative judicial system, and judges in a central province pledged to study it.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "reaction piece about a directive"
+ },
+ {
+  "sid": "s1466",
+  "type": "plain",
+  "text": "Forecasters in a South Pacific country on Tuesday widened yellow heavy-rain watches north of Taupo as a band of warm, unstable subtropical air moved southeast; the far-north region's watch lasted 10 hours, ending at 7 pm.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2
+  ],
+  "changed": "",
+  "trick": "weather alert with a specific region's timing"
+ },
+ {
+  "sid": "s1207",
+  "type": "plain",
+  "text": "A variety-store chain's nine-month profit slipped 7.6 per cent to about 1.25 billion yuan even as sales rose 19.3 per cent, with an earlier paper gain on an AI startup stake now reversing.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   2,
+   3
+  ],
+  "changed": "",
+  "trick": "results story framed around an investment, not the retailer"
+ },
+ {
+  "sid": "s1046",
+  "type": "fake",
+  "text": "A planned South Korean airport, due to open in 2029 at a cost of roughly 800 billion won, was blocked again, with judges faulting site selection for not weighing noise on nearby residents.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "collision risk with migratory birds -> noise on residents",
+  "trick": "court rationale swapped"
+ },
+ {
+  "sid": "s1067",
+  "type": "plain",
+  "text": "Three Chinese justice bodies jointly released model cases against defying court rulings, noting that convictions for refusing to carry out judgments in the first nine months rose about 9 per cent to roughly 3,400.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "statistics from a press conference with cases"
+ },
+ {
+  "sid": "s1869",
+  "type": "fake",
+  "text": "A departed chipmaker founder agreed to a closed-door interview with three congressional committees on 15 December, to be transcribed, while a newspaper reported the securities regulator is separately examining the firm's disclosures.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "1 December -> 15 December",
+  "trick": "date changed"
+ },
+ {
+  "sid": "s1565",
+  "type": "plain",
+  "text": "A Middle Eastern parliament picked a 54-year-old former air force officer and religious affairs minister as speaker late Tuesday, replacing a lawmaker from the prime minister's party; he was nominated by a party led by a former armed-forces chief of staff.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "same vote reported by many outlets; clue uses the speaker's biography"
+ },
+ {
+  "sid": "s1902",
+  "type": "fake",
+  "text": "With weeks to go before local elections, prosecutors in Taitung County searched and questioned over ten people linked to a councillor running for township chief, after the only rival was already indicted and detained over bribery.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "Hualien County -> Taitung County",
+  "trick": "county swapped, rest faithful"
+ },
+ {
+  "sid": "s1453",
+  "type": "plain",
+  "text": "A memory-chip maker's shares gained about 3.5 per cent pre-market after a major customer said supply commitments jumped from $279 billion to $390 billion, driven mostly by multi-year memory purchase agreements.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "stock move explained by another firm's earnings"
+ },
+ {
+  "sid": "s1417",
+  "type": "fake",
+  "text": "A Chinese internet group said its office AI agent now has over ten million daily users, and that an upgraded sandbox in its agent runtime lowers enterprise deployment costs by about 30 per cent.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "cost cut 70% -> about 30%",
+  "trick": "cost figure altered in earnings-day product news"
+ },
+ {
+  "sid": "s1218",
+  "type": "plain",
+  "text": "A Southeast Asian central bank's governor, asked after the latest quarterly growth figures came out, said it will examine whether price rises are broad and persistent before deciding on lifting its overnight policy rate next year.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "remarks at a GDP release, not the GDP itself"
+ },
+ {
+  "sid": "s1169",
+  "type": "plain",
+  "text": "On its first earnings call since its founder quit, a chipmaker's chairman said the founder had resigned voluntarily and ruled out his return, as the firm lifted its next-year revenue-growth outlook from about 70 to about 75 per cent.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "earnings call framed around management change"
+ },
+ {
+  "sid": "s1767",
+  "type": "fake",
+  "text": "A Chinese special administrative region's markets watchdog banned a financier for life after he repeatedly claimed, in licence applications in 2011, 2015 and 2018, to hold science and MBA degrees from 1994 at an Australian university, and submitted a forged certificate.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "New Zealand university -> Australian university",
+  "trick": "country of the degree-awarding school swapped"
+ },
+ {
+  "sid": "s1597",
+  "type": "plain",
+  "text": "In one of the last pre-blackout polls for Taiwan's capital, the incumbent trailed his challenger 42.7 per cent to 47.7, a reversal from an earlier survey that had him seven points ahead.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "one of many competing final polls"
+ },
+ {
+  "sid": "s1146",
+  "type": "twin",
+  "text": "A 56-year-old hiker plunged from a cliff just over three metres high near the Chinese capital; 22 volunteer rescuers carried him down on a spinal board and stretcher, and doctors confirmed a lumbar fracture.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "look-alike: earlier night rescue of four stranded hikers near Beijing by 15 volunteers"
+ },
+ {
+  "sid": "s1386",
+  "type": "fake",
+  "text": "At a news conference for antibiotic awareness week, a Taipei hospital and health agencies urged joint human-animal-environment control, citing WHO data that roughly one in three confirmed common bacterial infections worldwide in 2023 were drug-resistant.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   4,
+   5
+  ],
+  "changed": "one in six -> one in three",
+  "trick": "statistic altered"
+ },
+ {
+  "sid": "s1151",
+  "type": "fake",
+  "text": "An ambulance belonging to a development-zone hospital in a north-eastern Chinese port city was wedged under a 2.2-metre height barrier on Monday; the hospital later said nobody was hurt.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "Tuesday 17 November -> Monday",
+  "trick": "day changed; viral video story"
+ },
+ {
+  "sid": "s1007",
+  "type": "plain",
+  "text": "A South Korean ministry signed cooperation pacts with 16 large companies and bodies on the opening day of a three-day small-business week in Cheongju, with about 2 trillion won of public-private money earmarked to bring AI to small factories.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "policy event with big numbers"
+ },
+ {
+  "sid": "s1400",
+  "type": "plain",
+  "text": "At the Beijing launch of a winter influenza-awareness drive by a national health-education body, a disease-control official said several respiratory pathogens will alternate and overlap this winter and spring, with flu the main threat.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2
+  ],
+  "changed": "",
+  "trick": "seasonal health warning with no numbers"
+ },
+ {
+  "sid": "s1116",
+  "type": "twin",
+  "text": "Police in a south-eastern Taiwan county tracing cable thefts reported since August by the power utility, the railway and farmers searched a man's home on Monday, finding a grinder and pruning shears, and he tested positive for amphetamine.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "look-alike: same county's earlier 8-person cable-theft ring busted with a 120,000 NT dollar reward"
+ },
+ {
+  "sid": "s1738",
+  "type": "plain",
+  "text": "A Fields Medal-winning physicist lecturing on black hole thermodynamics at a university in a Chinese financial hub on Tuesday opened an AI assistant on the projector and was blocked by a regional-availability message.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "humorous anecdote, no named product"
+ },
+ {
+  "sid": "s1457",
+  "type": "plain",
+  "text": "A Shenzhen limited partnership focused on AI-industry private equity was registered with 5 billion yuan (about $700 million) of capital, co-funded by a Chinese toll-road operator.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "company-registry item"
+ },
+ {
+  "sid": "s1174",
+  "type": "plain",
+  "text": "A chip company reported quarterly revenue of roughly $116 billion, about $7 billion above Wall Street's forecast, guided to around $130 billion for the next quarter, and its shares rose about 2 per cent after hours.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "same earnings as other stories in file; uses revenue forecast gap"
+ },
+ {
+  "sid": "s1822",
+  "type": "fake",
+  "text": "A US chip-equipment maker broke ground in Miaoli County on its first site there, a technology centre due to open in 2030 and expected to create several hundred jobs.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "opening 2028 -> 2030",
+  "trick": "year changed"
+ },
+ {
+  "sid": "s1281",
+  "type": "fake",
+  "text": "A sportswear maker will replace a German rival after a quarter-century as supplier of match balls for Europe's top club competitions, reportedly paying about $45 million a year, roughly five times the previous contract.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "nearly double the previous contract -> roughly five times",
+  "trick": "ratio altered"
+ },
+ {
+  "sid": "s0996",
+  "type": "plain",
+  "text": "A Baltic state's new coalition won parliamentary approval with a slim 51 of 100 seats; its foreign minister is a former ambassador to Uzbekistan and its finance minister an economist, while the defence minister stayed on.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "cabinet composition details"
+ },
+ {
+  "sid": "s1489",
+  "type": "plain",
+  "text": "A Canadian province's northern areas were warned of up to 20 centimetres of snow and possible freezing rain on Saturday, even as its biggest city expected highs near 14 degrees this week with no snow forecast.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "weather contrast between north and south"
+ },
+ {
+  "sid": "s1348",
+  "type": "plain",
+  "text": "A Taiwanese private university ranked fifth on the island and first among private schools in a new interdisciplinary-science table covering 1,058 institutions from 102 jurisdictions, behind only four leading public universities.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "university rankings press release"
+ },
+ {
+  "sid": "s1875",
+  "type": "twin",
+  "text": "A 43-year-old mainland captain of a Hong Kong-registered freighter suspected over a damaged northern European seabed gas pipeline and cable pleaded guilty to two summons offences, was fined HK$4,000 (about US$510), and faces deportation after prosecutors dropped the criminal damage count.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "look-alike: a Finnish court's 3.5-year sentence for another cable-cutting ship captain"
+ },
+ {
+  "sid": "s1122",
+  "type": "twin",
+  "text": "Around 3 pm today at a junction in the island's capital, a cab and a motorbike collided so hard that a rider in his seventies was pinned beneath the vehicle, though he stayed conscious when firefighters freed him.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "look-alike: another Taipei crash where a man in his seventies hit a delivery rider and was run over"
+ },
+ {
+  "sid": "s1851",
+  "type": "fake",
+  "text": "A Chinese phone brand said it has led a Southeast Asian handset market for a fifth straight quarter with a 20 per cent retail volume share, ahead of two rivals on 17 per cent, and that its upcoming flagship's first-day reservations sold out.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "third straight quarter -> fifth",
+  "trick": "streak length changed"
+ },
+ {
+  "sid": "s1786",
+  "type": "plain",
+  "text": "Taiwan's premier attended the launch of the collected works of a Hakka writer who chronicled life under Japanese rule and after the war, saying the island is the global capital of Hakka culture.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "cultural event, writer unnamed"
+ },
+ {
+  "sid": "s1640",
+  "type": "plain",
+  "text": "A southern Taiwan city will bar cars from a stadium-area avenue on three days this week from 8 am to midnight for a K-pop group's concerts, suspend four bike-share stations until 1 am Monday, and run a free shuttle to the high-speed-rail station.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "logistics details instead of the concert"
+ },
+ {
+  "sid": "s1803",
+  "type": "plain",
+  "text": "Beijing's Taiwan affairs office said a veteran singer-songwriter famous for a hopeful 1980s anthem had voiced anguish over the island's cultural scene, citing a classical proverb that the virtuous are never alone.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "official response to a celebrity's remarks"
+ },
+ {
+  "sid": "s1323",
+  "type": "plain",
+  "text": "A Chinese state academy's computing-network institute updated a platform of 25 AI agent scientists spanning maths, chemistry, physics and materials, adding discussion rooms and team recommendations so users can convene cross-disciplinary meetings.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "research-tool product update"
+ },
+ {
+  "sid": "s1329",
+  "type": "plain",
+  "text": "At the UN climate conference in Turkey, a global young-scientists federation held a side event on 11 November and issued a climate-action initiative; its secretary-general gave the opening remarks.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "side event at a big summit"
+ },
+ {
+  "sid": "s1883",
+  "type": "fake",
+  "text": "A state vehicle regulator in Arizona barred a driverless-taxi operator from freeways, effective 11 November but disclosed on Tuesday, citing repeated entries into live roadwork zones after an earlier restriction following a May incident.",
+  "fake": true,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "California -> Arizona",
+  "trick": "US state swapped"
+ },
+ {
+  "sid": "s1034",
+  "type": "twin",
+  "text": "A drugmaker's regional manager and two sales reps in a Guangdong city were convicted of fraud after faking positive mutation tests for lung-cancer patients so a targeted drug was reimbursed, defrauding about 540,000 yuan of insurance funds.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "look-alike: another medical-rep insurance-fraud case in which a regional director got 11.5 years"
+ },
+ {
+  "sid": "s1351",
+  "type": "plain",
+  "text": "A Dutch study found that after floating solar panels covered a reservoir, clear-water stonewort algae vanished and toxin-capable bottom-dwelling cyanobacteria bloomed, though drinking-water quality was not harmed; it surfaced in a Taiwanese election-season row.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "foreign study cited in local debate"
+ },
+ {
+  "sid": "s1853",
+  "type": "fake",
+  "text": "A Southeast Asian currency, the ringgit, strengthened to 4.125 per US dollar today, its strongest level since 26 June.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   3
+  ],
+  "changed": "fell to weakest -> rose to strongest",
+  "trick": "direction reversed in a one-line flash item"
+ },
+ {
+  "sid": "s1127",
+  "type": "twin",
+  "text": "A two-vehicle collision just before 3 pm on a wet Wednesday seriously injured one person, taken to hospital by ambulance, and police shut a suburban junction expected to stay closed for hours for crash investigators.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "look-alike: a motorway crash closure in the same area on 13 November"
+ },
+ {
+  "sid": "s1255",
+  "type": "plain",
+  "text": "A Wall Street bank, for the second time this month, lowered its gold forecast, saying central banks buying around 60 tonnes monthly through 2028, versus a 17-tonne average before 2022, would be the key support.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "two successive forecast cuts"
+ },
+ {
+  "sid": "s1217",
+  "type": "plain",
+  "text": "A south-eastern European central bank sharply raised its year-end inflation projection to 7.4 per cent from 6.1 per cent in its quarterly report, blaming energy and fuel costs and currency swings.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   3
+  ],
+  "changed": "",
+  "trick": "quarterly report rather than rate decision"
+ },
+ {
+  "sid": "s1504",
+  "type": "plain",
+  "text": "China's emergency authorities reported that October floods and geological hazards affected about 293,000 people and killed four, with 19 rivers in seven provinces exceeding flood-warning levels, and rainfall averaging about 35 millimetres.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "monthly disaster statistics"
+ },
+ {
+  "sid": "s1720",
+  "type": "plain",
+  "text": "On arriving in a southern Chinese tech hub for a Pacific economic summit, a city-state's prime minister posted that it had been several years since his last visit and praised its AI and robotics innovation, attaching a video featuring robots.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2
+  ],
+  "changed": "",
+  "trick": "social-media post at a summit"
+ },
+ {
+  "sid": "s1406",
+  "type": "fake",
+  "text": "A Chinese special administrative region's seasonally adjusted jobless rate for August to October edged up 0.1 percentage point to 3.8 per cent, with underemployment steady at 2 per cent and about 1,200 fewer people in work than the prior period.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "rate fell 0.1 point -> rose 0.1 point",
+  "trick": "direction reversed"
+ },
+ {
+  "sid": "s1145",
+  "type": "plain",
+  "text": "Two men aged 64 and 54 lay in wait outside a 38-year-old debtor's home in central Taiwan before dawn yesterday, struck him with a bag of rocks and then stabbed his abdomen; both were later detained.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "violent debt dispute"
+ },
+ {
+  "sid": "s1755",
+  "type": "fake",
+  "text": "A bank survey found a Chinese financial hub's HK$10-million-plus households at around 412,000 mid-year, about 5,000 fewer than a year earlier, with a median net worth of HK$20 million.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "increase of about 5,000 -> decrease",
+  "trick": "direction reversed"
+ },
+ {
+  "sid": "s1614",
+  "type": "plain",
+  "text": "A south-western Chinese megacity's main airport passed on-site checks by the UN health agency and was formally granted an international health airport title this week.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "few concrete details"
+ },
+ {
+  "sid": "s1411",
+  "type": "plain",
+  "text": "At its annual tech event in San Francisco on Tuesday, a software giant's chief executive unveiled a shared workspace where staff and AI agents co-work, for instance an agent drafts a report, staff discuss it, and the agent revises it.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   1
+  ],
+  "changed": "",
+  "trick": "related Copilot stories from the same week"
+ },
+ {
+  "sid": "s1805",
+  "type": "plain",
+  "text": "A Taiwanese insurer disclosed leasing office space of 105.46 ping in a Taichung building from its sister life insurer, at NT$66,440 per month with a 3 per cent rise from December 2028.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "stock-exchange filing, similar group filings in list"
+ },
+ {
+  "sid": "s1690",
+  "type": "plain",
+  "text": "A city-state's prime minister said it is ready to help Washington check how advanced chips are used locally, after concern over a firm headquartered there whose boss is suspected of espionage, and that it is studying America's newest measures.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1
+  ],
+  "changed": "",
+  "trick": "chip-smuggling scandal angle"
+ },
+ {
+  "sid": "s1233",
+  "type": "fake",
+  "text": "An island currency slipped past 34 per US dollar for a second straight session today, with buyers pushing it there twice late in the day before a lift that traders attributed to the central bank.",
+  "fake": true,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2
+  ],
+  "changed": "33 -> 34",
+  "trick": "level changed"
+ },
+ {
+  "sid": "s1261",
+  "type": "plain",
+  "text": "A European central bank said after Wednesday's consumer price figures that inflation would keep climbing until mid-2027 on Middle East-driven energy costs, noting it lifted its policy rate from 3.75 to 4 per cent two weeks earlier.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   3
+  ],
+  "changed": "",
+  "trick": "statement on CPI data"
+ },
+ {
+  "sid": "s1198",
+  "type": "plain",
+  "text": "Three Chinese-listed companies closed below one yuan for the first time on Monday, with two more following Tuesday and another today, all nearing delisting thresholds.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "rolling list of stocks"
+ },
+ {
+  "sid": "s1099",
+  "type": "plain",
+  "text": "Polish cybercrime police arrested three more people in the probe of a collapsed crypto exchange, on warrants from national prosecutors' fourth investigative team, with identities undisclosed and details promised for the next day.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "no details about suspects"
+ },
+ {
+  "sid": "s1149",
+  "type": "plain",
+  "text": "Two vehicles collided at a Kaohsiung junction late yesterday: a 58-year-old ambulance driver and a 23-year-old motorist taking his girlfriend home, leaving the patient and a relative hurt and needing two replacement ambulances.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "ambulance crash with driver ages"
+ },
+ {
+  "sid": "s1724",
+  "type": "plain",
+  "text": "A cruise line ranked third largest worldwide agreed a three-year deal with a city-state's tourism board to base a ship there from late 2028, its first homeport in that country.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "future start date"
+ },
+ {
+  "sid": "s1895",
+  "type": "plain",
+  "text": "A Taiwanese health minister confirmed an anonymous complaint letter received last month, alleging the national insurance agency's head employed a personal make-up stylist at public expense, is under investigation; she said she was confident.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "scandal in a health agency"
+ },
+ {
+  "sid": "s1606",
+  "type": "plain",
+  "text": "After a run of outages at a software giant, aviation authorities and a big bank, the US president called it life and said Thanksgiving travel would be unaffected, while his deputy told Americans not to stockpile food.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "changed": "",
+  "trick": "official reaction to outages"
+ },
+ {
+  "sid": "s1638",
+  "type": "plain",
+  "text": "After a Chinese esports team beat four teams from a rival region in a row to win a world title, its eyewear sponsor displayed a gratitude message at an airport in that region.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "marketing stunt after an esports final"
+ },
+ {
+  "sid": "s1288",
+  "type": "plain",
+  "text": "In Tuesday's friendlies, a Japanese side lost 2-1 to a South American team, a Levantine kingdom beat Australia 2-0, and a visiting East Asian side won 1-0 at a Gulf host.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "roundup of several scores"
+ },
+ {
+  "sid": "s1333",
+  "type": "plain",
+  "text": "Chinese researchers used cryo-electron tomography to resolve a roughly 12-nanometre channel on a poxvirus core at 4.4 angstroms, finding it built from three proteins in six-fold layers with four lysines at the pore's centre.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "changed": "",
+  "trick": "highly technical science result"
+ },
+ {
+  "sid": "s1084",
+  "type": "plain",
+  "text": "A 62-year-old man who fled in September 1996 after beating his wife to death while drunk was seized at a food market in a northern Chinese city, having avoided phones and cameras and lived by scavenging and selling vegetables.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0
+  ],
+  "changed": "",
+  "trick": "30-year fugitive caught"
+ },
+ {
+  "sid": "s1315",
+  "type": "plain",
+  "text": "A UN environment-and-health report based on over a decade of research put the annual cost of hormone-disrupting chemicals at more than $1 trillion, calling regulation patchy and inadequate.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "global report"
+ },
+ {
+  "sid": "s1258",
+  "type": "plain",
+  "text": "China's central bank ran 700.2 billion yuan of overnight reverse repos with 714 billion maturing, a net withdrawal of 13.8 billion, as the 10-year government bond yield slipped below 1.6 per cent after a bond rally.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "market roundup with several numbers"
+ },
+ {
+  "sid": "s1847",
+  "type": "plain",
+  "text": "A South Korean firm holding Malaysian government licences will hold a briefing on December 1 from 3 to 5 pm in Seoul's Gangnam district for developers, builders and investors on a waterfront project in a Malaysian city bordering Singapore.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "promo-style event"
+ },
+ {
+  "sid": "s1631",
+  "type": "plain",
+  "text": "Technicians found the cause of last Friday's US nationwide flight grounding to be a router newly installed at an Arkansas communications facility; the installer is now testing the problem equipment in its headquarters laboratory.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "same event as another story in file; uses installer-lab detail"
+ },
+ {
+  "sid": "s1039",
+  "type": "plain",
+  "text": "Prosecutions for ignoring court orders in China have climbed each year, from about 6,900 launched in 2023 to roughly 7,850 in 2025, officials said at a joint briefing.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "yearly trend numbers, same briefing as another story"
+ },
+ {
+  "sid": "s1555",
+  "type": "plain",
+  "text": "A Middle Eastern parliament chose a new speaker late Tuesday by 66 votes to 52, backed by a four-party bloc plus two Arab-led parties, ousting a lawmaker from the caretaker prime minister's party.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "vote count of a repeated story"
+ },
+ {
+  "sid": "s1561",
+  "type": "plain",
+  "text": "Before a parliamentary vote for a speaker, the caretaker prime minister's right-wing allies debated for more than six hours in an attempt to delay it; the opposition candidate still won.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "filibuster angle of same event"
+ },
+ {
+  "sid": "s1563",
+  "type": "plain",
+  "text": "A Chinese law society's legislative-studies body held its fourth members' congress and annual meeting in Shanghai over Saturday and Sunday, where its president spoke on democracy and efficiency in lawmaking.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "changed": "",
+  "trick": "academic conference"
+ },
+ {
+  "sid": "s1438",
+  "type": "plain",
+  "text": "An adviser to a Korean national unification body told a Seoul women-leaders forum today that AI innovation cannot be stopped but its speed must be moderated so it stays under human control, with international cooperation.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [],
+  "changed": "",
+  "trick": "speech at a forum with other similar speeches"
+ },
+ {
+  "sid": "s1384",
+  "type": "plain",
+  "text": "A community clinic in Fujian's Zhangzhou was one of only two in the province and 20 nationwide chosen for a preventive-medicine association's vaccination-service project, despite sitting among dense top-tier hospitals and seeing over a thousand outpatients daily.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "local healthcare feature"
+ },
+ {
+  "sid": "s1549",
+  "type": "plain",
+  "text": "A provincial justice department in central China approved a corporate-lawyer licence for an applicant working at an investment-fund management firm, following a filing via the Changsha municipal bureau.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "administrative notice; similar notices for others"
+ },
+ {
+  "sid": "s1866",
+  "type": "plain",
+  "text": "A state broadcaster report from a south-eastern Chinese free-trade zone, set up in December 2014 across three areas totalling about 118 square kilometres, highlighted satellite-linked digital IDs for exported tea and zero-tariff bird's nests from Southeast Asia.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "feature segment"
+ },
+ {
+  "sid": "s1623",
+  "type": "plain",
+  "text": "A delegate at a Guizhou city's sixth Party congress said its aviation-parts manufacturing park is now 90 per cent occupied, while the city aims to become a first-class tourist destination and develop the low-altitude economy.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "congress delegate reactions"
+ },
+ {
+  "sid": "s1498",
+  "type": "plain",
+  "text": "Tomorrow, water cuts or reduced pressure will hit parts of ten Taiwanese cities and counties, with the longest, 10 hours, in a southern district covering 43 streets, where pipe-replacement work runs from 8 am to 6 pm.",
+  "fake": false,
+  "require_language": "zh",
+  "same_event": [],
+  "changed": "",
+  "trick": "similar daily outage lists for other dates"
+ },
+ {
+  "sid": "s1202",
+  "type": "plain",
+  "text": "A chip giant's shares fell 0.44 per cent to $155.46 in the regular session, with analysts flagging support near $150 and a 52-week low around $148.80, before an after-hours jump of up to 5 per cent on results.",
+  "fake": false,
+  "require_language": null,
+  "same_event": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "changed": "",
+  "trick": "technical-analysis angle on an earnings story"
+ }
+]

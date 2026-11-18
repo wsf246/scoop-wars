@@ -1,0 +1,11 @@
+
+baseline on dev (150 clues, 180s wall): right 120/150 (80.0%)  wrong 17  blank 13  points +206
+  time: median 6.1s  p90 8.9s  max 16.6s   key article in results 80.8% (rank 1: 69.2%)   errors 0
+  fake            right  15/30  ( 50.0%)  wrong  15  blank   0  points +0
+  local_id        right  27/29  ( 93.1%)  wrong   1  blank   1  points +52
+  local_zh        right  23/24  ( 95.8%)  wrong   0  blank   1  points +46
+  minimal         right   4/5   ( 80.0%)  wrong   1  blank   0  points +6
+  other_language  right   1/9   ( 11.1%)  wrong   0  blank   8  points +2
+  plain           right  44/47  ( 93.6%)  wrong   0  blank   3  points +88
+  twin            right   6/6   (100.0%)  wrong   0  blank   0  points +12
+  saved lab/runs/baseline-dev-202204.json   octen live calls so far: {'live_calls': 1098, 'tags': {'main': 454}}

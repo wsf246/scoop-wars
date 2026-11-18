@@ -1,0 +1,11 @@
+
+main_quick_a on mini (61 clues, 91s wall): right 51/61 (83.6%)  wrong 4  blank 6  points +94
+  time: median 8.4s  p90 13.1s  max 16.0s   key article in results 79.6% (rank 1: 63.3%)   errors 0
+  fake            right   9/12  ( 75.0%)  wrong   3  blank   0  points +12
+  local_id        right  11/12  ( 91.7%)  wrong   1  blank   0  points +20
+  local_zh        right   9/10  ( 90.0%)  wrong   0  blank   1  points +18
+  minimal         right   2/2   (100.0%)  wrong   0  blank   0  points +4
+  other_language  right   0/4   (  0.0%)  wrong   0  blank   4  points +0
+  plain           right  18/19  ( 94.7%)  wrong   0  blank   1  points +36
+  twin            right   2/2   (100.0%)  wrong   0  blank   0  points +4
+  saved lab/runs/main_quick_a-mini-202210.json   octen live calls so far: {'live_calls': 1098, 'tags': {'main': 454}}
