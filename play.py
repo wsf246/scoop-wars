@@ -274,6 +274,29 @@ def run_codex(clue: str, workdir: str, run_log: str, timeout: float, verbose: bo
 SEARCH_LANES = [("any_language", None), ("chinese_or_indonesian", ["zh", "id"])]  # one call each: the 2-call budget
 
 
+def clean_article_text(text: str | None) -> str:
+    """Keep captions and link labels while dropping Markdown URLs before clipping evidence."""
+    if not isinstance(text, str):
+        return ""
+    text = re.sub(r"!?\[([^\]\r\n]*)\]\((?:[^()\r\n]|\([^()\r\n]*\))*\)", r"\1", text)
+    return " ".join(text.split())
+
+
+def picker_article(article: dict) -> dict:
+    candidate = {
+        "title": article.get("title"),
+        "url": article.get("url"),
+        "published": article.get("time_published"),
+        "text": clean_article_text(article.get("highlight"))[:900],
+    }
+    # Keep query-focused highlights and body evidence in separate budgets. A matching
+    # headline or highlight may omit the number or negation that decides the clue.
+    article_text = clean_article_text(article.get("full_content"))[:2400]
+    if article_text and article_text != candidate["text"]:
+        candidate["article_text"] = article_text
+    return candidate
+
+
 def search_lanes(clue: str, started: float) -> list[dict]:
     """Search with the clue itself, once per lane, both at once.
 
@@ -284,14 +307,17 @@ def search_lanes(clue: str, started: float) -> list[dict]:
 
     def one(lane: tuple[str, list[str] | None]) -> dict:
         name, language = lane
-        body = {"query": clue[:500], "count": 10, "time_range": "day", "highlight": {"enable": True, "max_tokens": 200}}
+        body = {
+            "query": clue[:500],
+            "count": 10,
+            "time_range": "day",
+            "highlight": {"enable": True, "max_tokens": 200},
+            "full_content": {"enable": True, "max_tokens": 1000},
+        }
         if language:
             body["language"] = language
         data = octen_client.news_search(body)
-        articles = [
-            {"title": a.get("title"), "url": a.get("url"), "published": a.get("time_published"), "text": (a.get("highlight") or "")[:900]}
-            for a in (data.get("data") or {}).get("results") or []
-        ]
+        articles = [picker_article(a) for a in (data.get("data") or {}).get("results") or []]
         return {
             "name": name, "articles": articles, "t": round(time.time() - started, 1), "ok": data.get("code", 0) == 0,
             "refused": data.get("code") == 429, "q": f"{clue[:60]} [{', '.join(language) if language else 'any language'}]",
