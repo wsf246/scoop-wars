@@ -271,7 +271,80 @@ def run_codex(clue: str, workdir: str, run_log: str, timeout: float, verbose: bo
     return (data, error) if isinstance(data, dict) else (None, error or "agent's final answer was not a JSON card")
 
 
-SEARCH_LANES = [("any_language", None), ("chinese_or_indonesian", ["zh", "id"])]  # one call each: the 2-call budget
+# One call each: the 2-call budget. The first names every language except Chinese and Indonesian: with no filter,
+# News Search answers an English clue almost only in English and never shows a story that exists only in, say, Japanese.
+SEARCH_LANES = [
+    ("any_language", ["en", "ar", "de", "es", "fr", "hi", "it", "ja", "ko", "nl", "pl", "pt", "ru", "th", "tr", "vi"]),
+    ("chinese_or_indonesian", ["zh", "id"]),
+]
+# What Claude answers with: the card, after a check of each clue detail against the article (this is what catches fakes).
+PICK_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "checks": {
+            "type": "array",
+            "description": "Each concrete detail of the clue, checked against the chosen article",
+            "items": {
+                "type": "object",
+                "properties": {"detail": {"type": "string"}, "article_says": {"type": "string"}, "verdict": {"type": "string", "enum": ["same", "different", "not stated"]}},
+                "required": ["detail", "article_says", "verdict"],
+                "additionalProperties": False,
+            },
+        },
+        "url": {"type": "string", "description": "URL of the article, or empty when any check is 'different' or no article reports the story"},
+        "summary": {"type": "string", "description": "One-sentence English summary"},
+    },
+    "required": ["checks", "url", "summary"],
+    "additionalProperties": False,
+}
+
+# The answer pairs every detail of the clue with what the articles state, before the url: this is what catches fakes.
+PICK_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "story": {
+            "type": "string",
+            "description": "One English sentence, at most 35 words: what the closest story in the results reports, with real names and its own numbers, places, dates and outcomes. If nothing is close, say so."
+        },
+        "checks": {
+            "type": "array",
+            "description": "One entry per concrete detail of the clue",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "clue": {
+                        "type": "string",
+                        "description": "the detail as the clue states it, a few words"
+                    },
+                    "articles": {
+                        "type": "string",
+                        "description": "what the articles state for it, a few words, or 'not stated'"
+                    },
+                    "same": {
+                        "type": "boolean",
+                        "description": "False only when the articles state it differently"
+                    }
+                },
+                "required": [
+                    "clue",
+                    "articles",
+                    "same"
+                ],
+                "additionalProperties": False
+            }
+        },
+        "url": {
+            "type": "string",
+            "description": "URL of one article that reports the clue's story; empty when any check has same=False or no article reports it"
+        }
+    },
+    "required": [
+        "story",
+        "checks",
+        "url"
+    ],
+    "additionalProperties": False
+}
 
 
 def search_lanes(clue: str, started: float) -> list[dict]:
@@ -284,7 +357,7 @@ def search_lanes(clue: str, started: float) -> list[dict]:
 
     def one(lane: tuple[str, list[str] | None]) -> dict:
         name, language = lane
-        body = {"query": clue[:500], "count": 10, "time_range": "day", "highlight": {"enable": True, "max_tokens": 200}}
+        body = {"query": clue[:500], "count": 10, "time_range": "day", "highlight": {"enable": True, "max_tokens": 200}, "subjects": {"enable": False}}
         if language:
             body["language"] = language
         data = octen_client.news_search(body)
@@ -315,7 +388,7 @@ def run_agent(clue: str, timeout: float = GAME_TIMEOUT, verbose: bool = False) -
         card.refused = sum(s["refused"] for s in lanes)
         results = {s["name"]: s["articles"] for s in lanes}
         prompt = f"now: {datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}\nClue: {clue}\n\nSearch results:\n{json.dumps(results, ensure_ascii=False)}\n"
-        cmd = claude_command(PROMPT_FILE.read_text(encoding="utf-8").strip(), SCHEMA_FILE.read_text(encoding="utf-8"))
+        cmd = claude_command(PROMPT_FILE.read_text(encoding="utf-8").strip(), json.dumps(PICK_SCHEMA))
         answer, card.error = run_claude(cmd, prompt, max(1.0, timeout - (time.time() - started)), workdir, verbose)
         if answer is None and timeout - (time.time() - started) > 15:  # a failed call (rate limit, network): one more try if there's time
             answer, card.error = run_claude(cmd, prompt, timeout - (time.time() - started), workdir, verbose)
@@ -330,7 +403,11 @@ def run_agent(clue: str, timeout: float = GAME_TIMEOUT, verbose: bool = False) -
         card.refused = sum(c.get("status") == 429 for c in calls)
     if answer:
         card.url = str(answer.get("url") or "").strip()
-        card.summary = str(answer.get("summary") or "").strip()
+        card.summary = str(answer.get("summary") or answer.get("story") or "").strip()
+        if AGENT == "claude":  # decided in code, not left to the model
+            differs = any(isinstance(c, dict) and c.get("same") is False for c in answer.get("checks") or [])
+            if differs or card.url not in {a["url"] for s in lanes for a in s["articles"]}:
+                card.url = ""  # a detail of the clue differs from the story (a fake), or the link is not a search result
     shutil.rmtree(workdir, ignore_errors=True)
     return card
 
