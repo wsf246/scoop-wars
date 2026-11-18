@@ -15,8 +15,10 @@ or search() for the other Octen search APIs; 2 calls per clue, all APIs combined
 """
 
 import argparse
+import contextvars
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -25,7 +27,7 @@ import tempfile
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime
+from datetime import datetime, timezone
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
@@ -63,6 +65,10 @@ for _stream in (sys.stdout, sys.stderr):
 CODEX = os.environ.get("CODEX_BIN") or shutil.which("codex") or "codex"
 CODEX_MODEL = os.environ.get("CODEX_MODEL", "")  # empty = Codex default
 CODEX_REASONING = os.environ.get("CODEX_REASONING", "low")  # low | medium | high (check what your model supports)
+AGENT = os.environ.get("SCOOP_AGENT", "claude").lower()  # claude | codex: which CLI answers the clues and judges eval
+CLAUDE = os.environ.get("CLAUDE_BIN") or shutil.which("claude") or "claude"
+CLAUDE_MODEL = os.environ.get("SCOOP_CLAUDE_MODEL", "sonnet")  # an alias (haiku, sonnet, opus) or a full model name
+CLAUDE_EFFORT = os.environ.get("SCOOP_CLAUDE_EFFORT", "low")  # low | medium | high; empty = the model's default
 
 
 def team() -> dict:
@@ -160,14 +166,82 @@ def codex_command(workdir: str, out_file: str, run_log: str) -> list[str]:
     return cmd
 
 
-def run_agent(clue: str, timeout: float = GAME_TIMEOUT, verbose: bool = False) -> Card:
-    """Run Codex on one clue and return its card. Never raises."""
-    started = time.time()
-    workdir = tempfile.mkdtemp(prefix="scoop-")  # empty dir: no AGENTS.md, nothing to read
+def claude_env() -> dict:
+    """The environment of a plain terminal: without what a parent Claude session sets, which changes the CLI's login and mode."""
+    env = {k: v for k, v in os.environ.items() if not k.startswith("CLAUDE") and k != "ANTHROPIC_BASE_URL"}
+    env["MCP_CONNECTION_NONBLOCKING"] = "false"  # wait for the Octen tool to connect; otherwise Claude answers before it can search
+    return env
+
+
+def claude_command(system: str, schema: str, run_log: str | None = None) -> list[str]:
+    """`claude -p` answering in the given JSON schema. With run_log it gets one tool, Octen News Search; without, none."""
+    servers = {"octen": {"command": sys.executable, "args": [str(MCP_FILE)], "env": {"SCOOP_RUN_LOG": run_log}}} if run_log else {}
+    cmd = [
+        CLAUDE, "-p",
+        "--model", CLAUDE_MODEL,
+        "--system-prompt", system,
+        "--output-format", "json",
+        "--json-schema", schema,
+        "--mcp-config", json.dumps({"mcpServers": servers}),
+        "--strict-mcp-config",  # no other MCP servers
+        "--tools", "",  # Only Octen counts as search: no built-in WebSearch, WebFetch or Bash
+        "--setting-sources", "",  # your personal Claude settings can't add other tools
+        "--disable-slash-commands",
+        "--no-session-persistence",
+    ]
+    if CLAUDE_EFFORT:
+        cmd += ["--effort", CLAUDE_EFFORT]
+    if run_log:
+        cmd += ["--allowedTools", "mcp__octen__news_search"]  # no human to click approve
+    return cmd  # the prompt goes in on stdin
+
+
+def run_claude(cmd: list[str], prompt: str, timeout: float, workdir: str, verbose: bool = False) -> tuple[dict | None, str]:
+    """Run `claude -p` and return (its JSON answer, error). Never raises."""
+    try:
+        proc = subprocess.Popen(
+            cmd,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            cwd=workdir,
+            env=claude_env(),
+            start_new_session=True,
+        )
+    except FileNotFoundError:
+        return None, "claude not found. Install it: npm install -g @anthropic-ai/claude-code"
+    try:
+        out, err = proc.communicate(prompt, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        kill(proc)
+        return None, f"timed out after {timeout:.0f}s"
+    if verbose:
+        print((out or "").strip()[:4000], (err or "").strip()[-1000:], sep="\n")
+    try:
+        data = json.loads(out)
+    except json.JSONDecodeError:
+        return None, f"claude exited {proc.returncode}: {(err or out or '').strip()[-300:]}"
+    if not isinstance(data, dict) or data.get("is_error"):
+        why = (data.get("result") or data.get("subtype") or data.get("terminal_reason") or "failed") if isinstance(data, dict) else data
+        return None, f"claude: {str(why)[:300]}"
+    answer = data.get("structured_output")
+    if not isinstance(answer, dict):  # no structured output: the answer may be JSON in the text
+        found = re.search(r"\{.*\}", data.get("result") or "", re.S)
+        try:
+            answer = json.loads(found.group(0)) if found else None
+        except json.JSONDecodeError:
+            answer = None
+    return (answer, "") if isinstance(answer, dict) else (None, "agent's final answer was not a JSON card")
+
+
+def run_codex(clue: str, workdir: str, run_log: str, timeout: float, verbose: bool = False) -> tuple[dict | None, str]:
+    """Run `codex exec` on one clue and return (its JSON answer, error). Never raises."""
     out_file = os.path.join(workdir, "card.json")
-    run_log = os.path.join(workdir, "searches.jsonl")
     prompt = PROMPT_FILE.read_text(encoding="utf-8").strip() + f"\n\nClue: {clue}\n"
-    card = Card()
+    error = ""
     try:
         proc = subprocess.Popen(
             codex_command(workdir, out_file, run_log),
@@ -180,29 +254,83 @@ def run_agent(clue: str, timeout: float = GAME_TIMEOUT, verbose: bool = False) -
             start_new_session=True,
         )
     except FileNotFoundError:
-        card.error = "codex not found. Install it: npm install -g @openai/codex"
-        return card
+        return None, "codex not found. Install it: npm install -g @openai/codex"
     try:
         _, err = proc.communicate(prompt, timeout=timeout)
         if proc.returncode != 0:
-            card.error = f"codex exited {proc.returncode}: {(err or '').strip()[-300:]}"
+            error = f"codex exited {proc.returncode}: {(err or '').strip()[-300:]}"
     except subprocess.TimeoutExpired:
         kill(proc)
-        card.error = f"timed out after {timeout:.0f}s"
+        error = f"timed out after {timeout:.0f}s"
+    if not os.path.exists(out_file):
+        return None, error
+    try:
+        data = json.loads(Path(out_file).read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        data = None
+    return (data, error) if isinstance(data, dict) else (None, error or "agent's final answer was not a JSON card")
+
+
+SEARCH_LANES = [("any_language", None), ("chinese_or_indonesian", ["zh", "id"])]  # one call each: the 2-call budget
+
+
+def search_lanes(clue: str, started: float) -> list[dict]:
+    """Search with the clue itself, once per lane, both at once.
+
+    News Search matches meaning across languages, so the English clue finds the Chinese or Indonesian article
+    when the language filter is set. Call inside octen_client.capture(): each thread runs in a copy of the
+    caller's context so its search is recorded.
+    """
+
+    def one(lane: tuple[str, list[str] | None]) -> dict:
+        name, language = lane
+        body = {"query": clue[:500], "count": 10, "time_range": "day", "highlight": {"enable": True, "max_tokens": 200}}
+        if language:
+            body["language"] = language
+        data = octen_client.news_search(body)
+        articles = [
+            {"title": a.get("title"), "url": a.get("url"), "published": a.get("time_published"), "text": (a.get("highlight") or "")[:900]}
+            for a in (data.get("data") or {}).get("results") or []
+        ]
+        return {
+            "name": name, "articles": articles, "t": round(time.time() - started, 1), "ok": data.get("code", 0) == 0,
+            "refused": data.get("code") == 429, "q": f"{clue[:60]} [{', '.join(language) if language else 'any language'}]",
+        }
+
+    with ThreadPoolExecutor(len(SEARCH_LANES)) as ex:
+        return [f.result() for f in [ex.submit(contextvars.copy_context().run, one, lane) for lane in SEARCH_LANES]]
+
+
+def run_agent(clue: str, timeout: float = GAME_TIMEOUT, verbose: bool = False) -> Card:
+    """Run the agent (Claude, or Codex with SCOOP_AGENT=codex) on one clue and return its card. Never raises."""
+    started = time.time()
+    workdir = tempfile.mkdtemp(prefix="scoop-")  # empty dir: no AGENTS.md, nothing to read
+    run_log = os.path.join(workdir, "searches.jsonl")
+    card = Card()
+    if AGENT == "claude":
+        with octen_client.capture() as searches:
+            lanes = search_lanes(clue, started)
+        card.searches = list(searches)
+        card.search_times = [{"t": s["t"], "ok": s["ok"], "refused": s["refused"], "q": s["q"]} for s in lanes]
+        card.refused = sum(s["refused"] for s in lanes)
+        results = {s["name"]: s["articles"] for s in lanes}
+        prompt = f"now: {datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}\nClue: {clue}\n\nSearch results:\n{json.dumps(results, ensure_ascii=False)}\n"
+        cmd = claude_command(PROMPT_FILE.read_text(encoding="utf-8").strip(), SCHEMA_FILE.read_text(encoding="utf-8"))
+        answer, card.error = run_claude(cmd, prompt, max(1.0, timeout - (time.time() - started)), workdir, verbose)
+        if answer is None and timeout - (time.time() - started) > 15:  # a failed call (rate limit, network): one more try if there's time
+            answer, card.error = run_claude(cmd, prompt, timeout - (time.time() - started), workdir, verbose)
+    else:
+        answer, card.error = run_codex(clue, workdir, run_log, timeout, verbose)
     card.seconds = time.time() - started
-    if os.path.exists(run_log):
+    if os.path.exists(run_log):  # Codex's searches, logged by its MCP server
         with open(run_log, encoding="utf-8") as f:
             calls = [json.loads(line) for line in f if line.strip()]
         card.searches = [octen_client.label(c.get("api", "news-search"), c["query"]) for c in calls if c.get("status") == 200 and not c.get("code")]
         card.search_times = [{"t": round(c["t"] - started, 1), "ok": c.get("status") == 200 and not c.get("code"), "refused": c.get("status") == 429 or c.get("code") == 429, "q": c["query"][:80]} for c in calls]
         card.refused = sum(c.get("status") == 429 for c in calls)
-    if os.path.exists(out_file):
-        try:
-            data = json.loads(Path(out_file).read_text(encoding="utf-8"))
-            card.url = (data.get("url") or "").strip()
-            card.summary = (data.get("summary") or "").strip()
-        except (json.JSONDecodeError, AttributeError):
-            card.error = card.error or "agent's final answer was not a JSON card"
+    if answer:
+        card.url = str(answer.get("url") or "").strip()
+        card.summary = str(answer.get("summary") or "").strip()
     shutil.rmtree(workdir, ignore_errors=True)
     return card
 
@@ -297,12 +425,23 @@ def cmd_doctor(args) -> None:
 
     print("Scoop Wars doctor")
     line(sys.version_info >= (3, 10), "Python", sys.version.split()[0])
-    codex = shutil.which(CODEX) or (CODEX if os.path.exists(CODEX) else None)
-    line(bool(codex), "Codex CLI", codex or "not found: npm install -g @openai/codex")
-    if codex:
-        r = subprocess.run([CODEX, "login", "status"], capture_output=True, text=True, encoding="utf-8", errors="replace")
-        status = (r.stdout + r.stderr).strip().splitlines()
-        line(r.returncode == 0, "Codex login", status[-1] if status else "run: codex login")
+    if AGENT == "claude":
+        claude = shutil.which(CLAUDE) or (CLAUDE if os.path.exists(CLAUDE) else None)
+        line(bool(claude), "Claude CLI", claude or "not found: npm install -g @anthropic-ai/claude-code")
+        if claude:
+            r = subprocess.run([CLAUDE, "auth", "status"], capture_output=True, text=True, encoding="utf-8", errors="replace", env=claude_env())
+            try:
+                logged_in = bool(json.loads(r.stdout).get("loggedIn"))
+            except (json.JSONDecodeError, AttributeError):
+                logged_in = False
+            line(logged_in, "Claude login", f"signed in, model {CLAUDE_MODEL}" if logged_in else "run: claude auth login")
+    else:
+        codex = shutil.which(CODEX) or (CODEX if os.path.exists(CODEX) else None)
+        line(bool(codex), "Codex CLI", codex or "not found: npm install -g @openai/codex")
+        if codex:
+            r = subprocess.run([CODEX, "login", "status"], capture_output=True, text=True, encoding="utf-8", errors="replace")
+            status = (r.stdout + r.stderr).strip().splitlines()
+            line(r.returncode == 0, "Codex login", status[-1] if status else "run: codex login")
     try:
         import mcp  # noqa: F401
         import httpx  # noqa: F401
@@ -391,9 +530,30 @@ def judge_card(clue: dict, card: Card) -> dict:
     sys.path.insert(0, str(KIT_DIR))
     import judge
 
-    r = judge.judge(clue["text"], clue.get("key") or {}, card.url, card.summary, require_language=langs)
+    run_judge = claude_judge if AGENT == "claude" else judge.judge
+    r = run_judge(clue["text"], clue.get("key") or {}, card.url, card.summary, require_language=langs)
     verdict = {"match": "right", "no_match": "wrong"}.get(r["verdict"], "unsure")
     return {"verdict": verdict, "first": False, "reason": r["reason"]}
+
+
+def claude_judge(clue: str, key: dict, url: str, summary: str, require_language: list[str] | None = None, timeout: float = 90) -> dict:
+    """judge.judge() run by Claude instead of Codex: the same evidence and prompt, so eval needs no Codex login.
+
+    The game server still judges with Codex, so a borderline link can come out differently there.
+    """
+    import judge
+
+    page = judge.fetch_page_meta(url)
+    if not page.get("published"):
+        page = {**page, **judge.lookup_in_octen(url, summary)}
+    prompt = judge.build_prompt(clue, key, url, summary, time.time(), page, require_language)
+    workdir = tempfile.mkdtemp(prefix="scoop-judge-")
+    cmd = claude_command("You are a careful judge. Decide only from the evidence in the message.", json.dumps(judge.SCHEMA))
+    answer, error = run_claude(cmd, prompt, timeout, workdir)
+    shutil.rmtree(workdir, ignore_errors=True)
+    if answer and answer.get("verdict") in (judge.MATCH, judge.NO_MATCH, judge.UNSURE):
+        return {"verdict": answer["verdict"], "reason": str(answer.get("reason") or "").strip()[:300]}
+    return {"verdict": judge.UNSURE, "reason": f"Judge failed to run: {error}" if error else "Judge failed to run."}
 
 
 def cmd_eval(args) -> None:
@@ -585,11 +745,17 @@ def cmd_play(args) -> None:
         print(f"\n=== Clue {n}: {text}")
         card = run_agent(text, timeout=budget)
         print_card(card)
-        try:
-            api("POST", "/api/cards", {"n": n, "url": card.url, "summary": card.summary})
-            print(f"  submitted clue {n}")
-        except ServerError as e:
-            print(f"  NOT submitted: {e}. Paste the card into the backup form.")
+        for attempt in range(3):  # venue Wi-Fi: don't lose a card to one dropped request
+            try:
+                api("POST", "/api/cards", {"n": n, "url": card.url, "summary": card.summary}, timeout=5)
+                print(f"  submitted clue {n}")
+                return
+            except ServerError as e:
+                if attempt == 2 or str(e)[:1] == "4":  # the server said no (closed, already answered): retrying won't help
+                    print(f"  NOT submitted: {e}. Paste the card into the backup form.")
+                    return
+                print(f"  submit failed ({e}), retrying...")
+                time.sleep(1)
 
     while True:
         try:
